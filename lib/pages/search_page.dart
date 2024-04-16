@@ -34,6 +34,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const BackButton(color: Colors.white),
+        titleSpacing: -10,
         title: const Text(
           'Search',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -64,6 +66,7 @@ class _SearchPageState extends State<SearchPage> {
                 hintText: 'Search Note',
                 suffixIcon: Icon(Icons.search, color: Colors.black54,)
               ),
+              onChanged: (keyword) => searchNotes(keyword),
               onSubmitted: (keyword) {
                 setState(() => isLoading = true);
                 searchNotes(keyword);

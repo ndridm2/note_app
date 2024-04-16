@@ -32,14 +32,42 @@ class _EditPageState extends State<EditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Edit note',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.home,
             color: Colors.white,
           ),
         ),
         backgroundColor: Colors.blue,
+        titleSpacing: -10,
+        title: const Text(
+          'Edit Note',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'Jersey20'),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                Note note = Note(
+                    id: widget.note.id,
+                    title: titleController.text,
+                    content: contentController.text,
+                    createdAt: DateTime.now());
+                LocalDatasource().updateNoteById(note);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return const MyApp();
+                }));
+              }
+            },
+            icon: const Icon(Icons.save_alt, color: Colors.white,),
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: Form(
         key: _formKey,
@@ -75,29 +103,6 @@ class _EditPageState extends State<EditPage> {
               },
             ),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            Note note = Note(
-                id: widget.note.id,
-                title: titleController.text,
-                content: contentController.text,
-                createdAt: DateTime.now());
-            LocalDatasource().updateNoteById(note);
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) {
-              return const MyApp();
-            }));
-          }
-        },
-        backgroundColor: Colors.white,
-        splashColor: Colors.blueGrey,
-        child: const Icon(
-          Icons.save,
-          size: 30,
-          color: Colors.blue,
         ),
       ),
     );

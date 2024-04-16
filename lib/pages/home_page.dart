@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:note_app/data/datasources/local_datasource.dart';
 import 'package:note_app/pages/add_page.dart';
 import 'package:note_app/pages/detail_page.dart';
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
+            fontFamily: 'Jersey20',
           ),
         ),
         elevation: 2,
@@ -55,24 +57,25 @@ class _HomePageState extends State<HomePage> {
               }));
             },
             icon: const CircleAvatar(
-              radius: 17,
+              radius: 14,
               backgroundColor: Colors.white,
               child: Icon(
                 Icons.search,
-                color: Colors.black,
+                color: Colors.blue,
               ),
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 8),
         ],
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator(
-            value: 0.0,
-                  strokeWidth: 10.0,
-                  backgroundColor: Colors.grey,
-                  color: Colors.blue,
-          ))
+          ? const Center(
+              child: CircularProgressIndicator(
+              value: 0.0,
+              strokeWidth: 10.0,
+              backgroundColor: Colors.grey,
+              color: Colors.blue,
+            ))
           : notes.isEmpty
               ? const Center(child: Text('No Notes'))
               : GridView.builder(
@@ -112,14 +115,36 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Icon(Icons.notes, size: 32),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Icon(
+                                        Icons.notes,
+                                        size: 32,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        DateFormat(
+                                                DateFormat.YEAR_NUM_MONTH_DAY)
+                                            .format(notes[index].createdAt),
+                                        style: const TextStyle(
+                                          color: Colors.black54,
+                                          fontFamily: 'jersey20',
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   const SizedBox(height: 6),
                                   Text(
                                     notes[index].title,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleLarge
-                                        ?.copyWith(color: Colors.white),
+                                        ?.copyWith(
+                                            color: Colors.white,
+                                            fontFamily: 'Oxygen'),
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
@@ -127,8 +152,10 @@ class _HomePageState extends State<HomePage> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium
-                                        ?.copyWith(color: Colors.white),
-                                    maxLines: 2,
+                                        ?.copyWith(
+                                            color: Colors.white,
+                                            fontFamily: 'Oxygen'),
+                                    maxLines: 3,
                                   ),
                                 ],
                               ),
@@ -152,7 +179,7 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(
           Icons.add,
           size: 30,
-          color: Colors.black,
+          color: Colors.blue,
         ),
       ),
     );

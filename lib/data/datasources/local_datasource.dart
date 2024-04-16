@@ -44,11 +44,11 @@ class LocalDatasource {
   }
 
   //search by title
-  Future<List<Note>> searchTitle(String keyword) async {
+  Future<List<Note>> searchTitle(String query) async {
     // ignore: unused_local_variable
     final db = await _openDatabase();
     List<Note> list = await getNotes();
-    return list.where((element) => element.title.contains(keyword)).toList();
+    return list.where((element) => element.title.toLowerCase().contains(query.toLowerCase())).toList();
   }
 
   //update data

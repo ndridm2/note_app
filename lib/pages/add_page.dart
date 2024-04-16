@@ -19,14 +19,45 @@ class _AddPageState extends State<AddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
+        leading: const BackButton(
+          color: Colors.white,
+        ),
+        titleSpacing: -10,
         title: const Text(
-          'Add a new notes',
+          'Add Notes',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
+            fontFamily: 'Jersey20',
           ),
         ),
-        backgroundColor: Colors.blue,
+        actions: [
+          IconButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                Note note = Note(
+                  title: titleController.text,
+                  content: contentController.text,
+                  createdAt: DateTime.now(),
+                );
+                LocalDatasource().insertNote(note);
+                titleController.clear();
+                contentController.clear();
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Note successfully saved'),
+                  backgroundColor: Colors.blueGrey,
+                ));
+                Navigator.pop(context);
+              }
+            },
+            icon: const Icon(
+              Icons.save_alt,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: Form(
         key: _formKey,
@@ -61,34 +92,7 @@ class _AddPageState extends State<AddPage> {
                 return null;
               },
             ),
-            const SizedBox(height: 36),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Note note = Note(
-                    title: titleController.text,
-                    content: contentController.text,
-                    createdAt: DateTime.now(),
-                  );
-                  LocalDatasource().insertNote(note);
-                  titleController.clear();
-                  contentController.clear();
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Note successfully saved'),
-                    backgroundColor: Colors.blueGrey,
-                  ));
-                  Navigator.pop(context);
-                }
-              },
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                overlayColor: MaterialStatePropertyAll(Colors.blueGrey),
-              ),
-              child: const Text(
-                'Save',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),
