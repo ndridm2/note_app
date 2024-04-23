@@ -66,7 +66,7 @@ class _EditPageState extends State<EditPage> {
                 LocalDatasource().updateNoteById(note);
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) {
-                  return const MyApp();
+                  return const HomePage();
                 }));
               }
             },

@@ -3,6 +3,7 @@ import 'package:note_app/data/datasources/local_datasource.dart';
 import 'package:note_app/main.dart';
 
 import 'package:note_app/pages/edit_page.dart';
+import 'package:note_app/pages/home_page.dart';
 import '../data/models/note.dart';
 
 class DetailPage extends StatefulWidget {
@@ -81,7 +82,7 @@ class _DetailPageState extends State<DetailPage> {
                               // ignore: use_build_context_synchronously
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(builder: (context) {
-                                return const MyApp();
+                                return const HomePage();
                               }));
                             },
                             child: const Text('Delete'),
