@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/data/datasources/local_datasource.dart';
-import 'package:note_app/main.dart';
 import 'package:note_app/pages/home_page.dart';
 
 import '../data/models/note.dart';
@@ -66,7 +65,7 @@ class _EditPageState extends State<EditPage> {
                 LocalDatasource().updateNoteById(note);
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) {
-                  return const MyApp();
+                  return const HomePage();
                 }));
               }
             },
