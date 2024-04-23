@@ -12,6 +12,14 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final List<Color> colors = [
+    Colors.lightBlue.shade700,
+    Colors.redAccent.shade700,
+    Colors.lightGreen.shade700,
+    Colors.pinkAccent.shade700,
+    Colors.deepPurpleAccent
+  ];
+
   List<Note> notes = [];
   final searchController = TextEditingController();
 
@@ -34,13 +42,9 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Colors.white),
-        titleSpacing: -10,
-        title: const Text(
-          'Search',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        backgroundColor: Colors.blue,
+        leading: const BackButton(color: Colors.black54),
+        backgroundColor: Colors.white,
+        elevation: 0.1,
       ),
       body: Column(
         children: [
@@ -61,11 +65,13 @@ class _SearchPageState extends State<SearchPage> {
               controller: searchController,
               textInputAction: TextInputAction.search,
               decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(16),
-                border: InputBorder.none,
-                hintText: 'Search Note',
-                suffixIcon: Icon(Icons.search, color: Colors.black54,)
-              ),
+                  contentPadding: EdgeInsets.all(16),
+                  border: InputBorder.none,
+                  hintText: 'Search Note',
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Colors.black54,
+                  )),
               onChanged: (keyword) => searchNotes(keyword),
               onSubmitted: (keyword) {
                 setState(() => isLoading = true);
@@ -83,7 +89,7 @@ class _SearchPageState extends State<SearchPage> {
                     color: Colors.blue,
                   ))
                 : notes.isEmpty
-                    ? const Center(child: Text('No Notes'))
+                    ? Center(child: Image.asset('assets/searchimg.png', width: 200,height: 200,))
                     : GridView.builder(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 14),
@@ -105,7 +111,7 @@ class _SearchPageState extends State<SearchPage> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue,
+                                color: colors[index % colors.length],
                                 boxShadow: const [
                                   BoxShadow(
                                     color: Colors.grey,

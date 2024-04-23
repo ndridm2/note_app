@@ -19,16 +19,17 @@ class _AddPageState extends State<AddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
+        elevation: 0.1,
         leading: const BackButton(
-          color: Colors.white,
+          color: Colors.black54,
         ),
         titleSpacing: -10,
         title: const Text(
           'Add Notes',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Colors.black,
             fontFamily: 'Jersey20',
           ),
         ),
@@ -51,9 +52,9 @@ class _AddPageState extends State<AddPage> {
                 Navigator.pop(context);
               }
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.save_alt,
-              color: Colors.white,
+              color: Colors.tealAccent.shade700,
             ),
           ),
           const SizedBox(width: 8),

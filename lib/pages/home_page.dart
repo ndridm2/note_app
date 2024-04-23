@@ -15,6 +15,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final List<Color> colors = [
+    Colors.lightBlue.shade700,
+    Colors.redAccent.shade700,
+    Colors.lightGreen.shade700,
+    Colors.pinkAccent.shade700,
+    Colors.deepPurpleAccent
+  ];
+
   List<Note> notes = [];
 
   bool isLoading = false;
@@ -39,16 +48,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Note App',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Colors.black,
             fontFamily: 'Jersey20',
           ),
         ),
-        elevation: 2,
-        backgroundColor: Colors.blue,
+        elevation: 0.1,
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {
@@ -58,14 +68,14 @@ class _HomePageState extends State<HomePage> {
             },
             icon: const CircleAvatar(
               radius: 14,
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.black54,
               child: Icon(
                 Icons.search,
-                color: Colors.blue,
+                color: Colors.white,
               ),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 10),
         ],
       ),
       body: isLoading
@@ -98,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue,
+                          color: colors[index % colors.length],
                           boxShadow: const [
                             BoxShadow(
                               color: Colors.grey,
@@ -119,17 +129,17 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.notes,
                                         size: 32,
-                                        color: Colors.white,
+                                        color: Colors.grey.shade300,
                                       ),
                                       Text(
                                         DateFormat(
-                                                DateFormat.YEAR_NUM_MONTH_DAY)
+                                                DateFormat.ABBR_MONTH_WEEKDAY_DAY)
                                             .format(notes[index].createdAt),
-                                        style: const TextStyle(
-                                          color: Colors.black54,
+                                        style: TextStyle(
+                                          color: Colors.grey.shade300,
                                           fontFamily: 'jersey20',
                                           fontSize: 16,
                                         ),
@@ -179,7 +189,7 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(
           Icons.add,
           size: 30,
-          color: Colors.blue,
+          color: Colors.black,
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/data/datasources/local_datasource.dart';
 import 'package:note_app/main.dart';
+import 'package:note_app/pages/home_page.dart';
 
 import '../data/models/note.dart';
 
@@ -33,19 +34,24 @@ class _EditPageState extends State<EditPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+              return const HomePage();
+            }));
+          },
           icon: const Icon(
             Icons.home,
-            color: Colors.white,
+            color: Colors.black54,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
+        elevation: 0.1,
         titleSpacing: -10,
         title: const Text(
           'Edit Note',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Colors.black,
               fontFamily: 'Jersey20'),
         ),
         actions: [
@@ -64,7 +70,7 @@ class _EditPageState extends State<EditPage> {
                 }));
               }
             },
-            icon: const Icon(Icons.save_alt, color: Colors.white,),
+            icon: Icon(Icons.save_alt, color: Colors.tealAccent.shade700,),
           ),
           const SizedBox(width: 8),
         ],

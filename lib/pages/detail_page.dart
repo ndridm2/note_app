@@ -22,11 +22,12 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        leading: const BackButton(color: Colors.white,),
+        backgroundColor: Colors.white,
+        elevation: 0.1,
+        leading: const BackButton(color: Colors.black54,),
         actions: [
           PopupMenuButton(
-            iconColor: Colors.white,
+            iconColor: Colors.black54,
             itemBuilder: (context) => <PopupMenuEntry<String>>[
               PopupMenuItem<String>(
                 value: 'Edit',
